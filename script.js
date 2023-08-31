@@ -17,7 +17,7 @@ function initializeMachine(machineNumber) {
 
   const machineLabel = document.createElement('div');
   machineLabel.className = 'machine-label';
-  machineLabel.innerHTML = `Machine ${machineNumber}`;
+  machineLabel.innerHTML = `Device ${machineNumber}`;
 
   const timer = document.createElement('div');
   timer.className = 'timer';
@@ -44,7 +44,7 @@ function initializeMachine(machineNumber) {
     intervalId = setInterval(() => {
       const minutes = Math.floor(timeLeft / 60);
       const seconds = timeLeft % 60;
-      document.getElementById(`timer-${machineNumber}`).innerHTML = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+      document.getElementById(`timer-${machineNumber}`).innerHTML = `Remaining time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
 
       const currentTime = new Date();
       const estimatedCompletion = new Date(currentTime.getTime() + timeLeft * 1000);

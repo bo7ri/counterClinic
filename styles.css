@@ -93,8 +93,12 @@ body {
       font-size: 18px;
     }
   
-    .timer, .machine-label {
+    .timer, .machine-label, .end-time {
       font-size: 36px;
+    }
+  
+    .patient-name {
+      font-size: 18px;
     }
   }
   
