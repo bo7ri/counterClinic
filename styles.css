@@ -1,0 +1,99 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: #4A90E2;
+  }
+  
+  #machine-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .machine {
+    width: calc(33% - 20px);
+    height: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .machine-label {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .timer {
+    font-size: 48px;
+    color: #4A90E2;
+    margin-bottom: 20px;
+  }
+  
+  input {
+    width: 100px;
+    padding: 5px;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #4A90E2;
+    color: white;
+    flex: 1;
+    min-width: 80px;
+  }
+  * Responsive layout */
+  @media only screen and (max-width: 768px) {
+    .container {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .machine {
+      width: calc(50% - 20px); /* Two machines per row on tablet and mobile */
+    }
+  
+    button, input {
+      font-size: 18px; /* Make buttons and input bigger for easier interaction */
+    }
+  
+    .timer, .machine-label {
+      font-size: 36px; /* Make labels and timers bigger */
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .machine {
+      width: 100%; /* One machine per row on small mobile screens */
+    }
+  }  
