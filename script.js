@@ -9,6 +9,12 @@ function initializeMachine(machineNumber) {
   const machine = document.createElement('div');
   machine.className = 'machine';
 
+  const patientName = document.createElement('input');
+  patientName.type = 'text';
+  patientName.placeholder = 'Patient Name';
+  patientName.id = `patient-${machineNumber}`;
+  patientName.className = 'patient-name';
+
   const machineLabel = document.createElement('div');
   machineLabel.className = 'machine-label';
   machineLabel.innerHTML = `Machine ${machineNumber}`;
@@ -16,12 +22,12 @@ function initializeMachine(machineNumber) {
   const timer = document.createElement('div');
   timer.className = 'timer';
   timer.id = `timer-${machineNumber}`;
-  timer.innerHTML = '00:00';
+  timer.innerHTML = 'Remaining time: 00:00';
 
-  const estimatedTimeDisplay = document.createElement('div');
-  estimatedTimeDisplay.className = 'estimated-time';
-  estimatedTimeDisplay.id = `estimated-time-${machineNumber}`;
-  estimatedTimeDisplay.innerHTML = 'Estimated completion: N/A';
+  const endTimeDisplay = document.createElement('div');
+  endTimeDisplay.className = 'end-time';
+  endTimeDisplay.id = `end-time-${machineNumber}`;
+  endTimeDisplay.innerHTML = 'End Time: 00:00';
 
   const inputMinutes = document.createElement('input');
   inputMinutes.type = 'number';
@@ -34,6 +40,7 @@ function initializeMachine(machineNumber) {
     clearInterval(intervalId);
     const input = document.getElementById(`input-${machineNumber}`).value;
     let timeLeft = input * 60;
+
     intervalId = setInterval(() => {
       const minutes = Math.floor(timeLeft / 60);
       const seconds = timeLeft % 60;
@@ -41,11 +48,9 @@ function initializeMachine(machineNumber) {
 
       const currentTime = new Date();
       const estimatedCompletion = new Date(currentTime.getTime() + timeLeft * 1000);
-      let hours = estimatedCompletion.getHours();
-      hours = hours % 12;
-      hours = hours ? hours : 12; // the hour '0' should be '12'
+      const hours = estimatedCompletion.getHours() % 12 || 12;
       const minutesET = estimatedCompletion.getMinutes();
-      estimatedTimeDisplay.innerHTML = `Estimated completion: ${hours}:${minutesET.toString().padStart(2, '0')} ${estimatedCompletion.getHours() >= 12 ? 'PM' : 'AM'}`;
+      endTimeDisplay.innerHTML = `End Time: ${hours}:${minutesET.toString().padStart(2, '0')} ${estimatedCompletion.getHours() >= 12 ? 'PM' : 'AM'}`;
 
       if (timeLeft === 0) {
         clearInterval(intervalId);
@@ -58,16 +63,23 @@ function initializeMachine(machineNumber) {
   resetButton.innerHTML = 'Reset';
   resetButton.addEventListener('click', () => {
     clearInterval(intervalId);
-    document.getElementById(`timer-${machineNumber}`).innerHTML = '00:00';
-    estimatedTimeDisplay.innerHTML = 'Estimated completion: N/A';
+    document.getElementById(`timer-${machineNumber}`).innerHTML = 'Remaining time: 00:00';
+    document.getElementById(`input-${machineNumber}`).value = '';
+    document.getElementById(`end-time-${machineNumber}`).innerHTML = 'End Time: 00:00';
+    patientName.value = '';
   });
-  
-    machine.appendChild(machineLabel);
-    machine.appendChild(timer);
-    machine.appendChild(estimatedTimeDisplay);
-    machine.appendChild(inputMinutes);
-    machine.appendChild(startButton);
-    machine.appendChild(resetButton);
-  
-    container.appendChild(machine);
-  }
+
+  const buttonContainer = document.createElement('div');
+  buttonContainer.className = 'button-container';
+  buttonContainer.appendChild(inputMinutes);
+  buttonContainer.appendChild(startButton);
+  buttonContainer.appendChild(resetButton);
+
+  machine.appendChild(patientName);
+  machine.appendChild(machineLabel);
+  machine.appendChild(timer);
+  machine.appendChild(endTimeDisplay);
+  machine.appendChild(buttonContainer);
+
+  container.appendChild(machine);
+}

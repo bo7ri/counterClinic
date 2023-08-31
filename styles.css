@@ -31,32 +31,35 @@ body {
     background: #fff;
     border: 1px solid #ccc;
     margin: 10px;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 30px; /* Increased Padding */
+    border-radius: 15px; /* Rounded Corners */
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     text-align: center;
   }
   
   .button-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* Space buttons apart */
     flex-wrap: wrap;
     margin-top: 20px;
   }
   
-  .machine-label {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .timer {
-    font-size: 48px;
+  .machine-label, .timer, .end-time {
+    font-size: 25px;
     color: #4A90E2;
     margin-bottom: 20px;
   }
   
-  input {
+  .patient-name {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  input[type=number] {
     width: 100px;
     padding: 8px;
     font-size: 16px;
@@ -75,10 +78,6 @@ body {
     color: white;
   }
   
-  button:disabled {
-    background-color: #ccc;
-    color: #999;
-  }
   
   @media only screen and (max-width: 768px) {
     .container {
