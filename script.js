@@ -3,73 +3,67 @@ for (let i = 1; i <= 9; i++) {
   }
   
   function initializeMachine(machineNumber) {
-    const machine = document.createElement("div");
-    machine.className = "machine";
-    machine.id = `machine-${machineNumber}`;
+    const container = document.getElementById('machine-container');
   
-    const machineLabel = document.createElement("div");
-    machineLabel.className = "machine-label";
+    const machine = document.createElement('div');
+    machine.className = 'machine';
+  
+    const machineLabel = document.createElement('div');
+    machineLabel.className = 'machine-label';
     machineLabel.innerHTML = `Machine ${machineNumber}`;
-    machine.appendChild(machineLabel);
   
-    const timerDisplay = document.createElement("div");
-    timerDisplay.className = "timer";
-    timerDisplay.id = `timer-${machineNumber}`;
-    timerDisplay.innerHTML = "00:00";
-    machine.appendChild(timerDisplay);
+    const timer = document.createElement('div');
+    timer.className = 'timer';
+    timer.id = `timer-${machineNumber}`;
+    timer.innerHTML = '00:00';
   
-    const timeInput = document.createElement("input");
-    timeInput.type = "number";
-    timeInput.placeholder = "Minutes";
-    machine.appendChild(timeInput);
+    const estimatedTimeDisplay = document.createElement('div');
+    estimatedTimeDisplay.className = 'estimated-time';
+    estimatedTimeDisplay.id = `estimated-time-${machineNumber}`;
+    estimatedTimeDisplay.innerHTML = 'Estimated completion: N/A';
   
-    let timerInterval;
-    let timeLeft = 0;
+    const inputMinutes = document.createElement('input');
+    inputMinutes.type = 'number';
+    inputMinutes.placeholder = 'Minutes';
+    inputMinutes.id = `input-${machineNumber}`;
   
-    const buttonContainer = document.createElement("div");
-    buttonContainer.className = "button-container";
+    const startButton = document.createElement('button');
+    startButton.innerHTML = 'Start';
+    startButton.addEventListener('click', () => {
+      const input = document.getElementById(`input-${machineNumber}`).value;
+      let timeLeft = input * 60;
+      const intervalId = setInterval(() => {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        document.getElementById(`timer-${machineNumber}`).innerHTML = `${minutes}:${seconds.toString().padStart(2, '0')}`;
   
-    const startButton = document.createElement("button");
-    startButton.innerHTML = "Start";
-    startButton.addEventListener("click", () => {
-      clearInterval(timerInterval);
-      timeLeft = parseInt(timeInput.value) * 60;
-      timerDisplay.innerHTML = formatTime(timeLeft);
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        timerDisplay.innerHTML = formatTime(timeLeft);
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          alert(`Machine ${machineNumber} is done!`);
+        const currentTime = new Date();
+        const estimatedCompletion = new Date(currentTime.getTime() + timeLeft * 1000);
+        const hours = estimatedCompletion.getHours();
+        const minutesET = estimatedCompletion.getMinutes();
+        estimatedTimeDisplay.innerHTML = `Estimated completion: ${hours}:${minutesET.toString().padStart(2, '0')} ${hours >= 12 ? 'PM' : 'AM'}`;
+  
+        if (timeLeft === 0) {
+          clearInterval(intervalId);
         }
+        timeLeft -= 1;
       }, 1000);
     });
   
-    const pauseButton = document.createElement("button");
-    pauseButton.innerHTML = "Pause";
-    pauseButton.addEventListener("click", () => {
-      clearInterval(timerInterval);
-    });
+    const pauseButton = document.createElement('button');
+    pauseButton.innerHTML = 'Pause';
   
-    const resetButton = document.createElement("button");
-    resetButton.innerHTML = "Reset";
-    resetButton.addEventListener("click", () => {
-      clearInterval(timerInterval);
-      timeLeft = 0;
-      timerDisplay.innerHTML = "00:00";
-    });
+    const resetButton = document.createElement('button');
+    resetButton.innerHTML = 'Reset';
   
-    buttonContainer.appendChild(startButton);
-    buttonContainer.appendChild(pauseButton);
-    buttonContainer.appendChild(resetButton);
-    machine.appendChild(buttonContainer);
+    machine.appendChild(machineLabel);
+    machine.appendChild(timer);
+    machine.appendChild(estimatedTimeDisplay);
+    machine.appendChild(inputMinutes);
+    machine.appendChild(startButton);
+    machine.appendChild(pauseButton);
+    machine.appendChild(resetButton);
   
-    document.getElementById("machine-container").appendChild(machine);
-  }
-  
-  function formatTime(time) {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    container.appendChild(machine);
   }
   
