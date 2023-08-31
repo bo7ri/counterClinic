@@ -45,8 +45,8 @@ body {
   }
   
   .machine-label, .timer, .end-time {
-    font-size: 24px;
-    color: #333;
+    font-size: 25px;
+    color: #4A90E2;
     margin-bottom: 20px;
   }
   
@@ -92,7 +92,8 @@ body {
     }
   
     .timer, .machine-label, .end-time {
-      font-size: 36px;
+      font-size: 25px;
+      color: #4A90E2;
     }
   
     .patient-name {
