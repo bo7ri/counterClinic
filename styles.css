@@ -72,28 +72,27 @@ body {
     flex: 1;
     min-width: 80px;
   }
-  * Responsive layout */
   @media only screen and (max-width: 768px) {
     .container {
-      width: 100%;
+      width: 95%;
       padding: 15px;
     }
   
     .machine {
-      width: calc(50% - 20px); /* Two machines per row on tablet and mobile */
+      width: calc(50% - 10px); 
     }
   
     button, input {
-      font-size: 18px; /* Make buttons and input bigger for easier interaction */
+      font-size: 18px; 
     }
   
     .timer, .machine-label {
-      font-size: 36px; /* Make labels and timers bigger */
+      font-size: 36px; 
     }
   }
   
   @media only screen and (max-width: 480px) {
     .machine {
-      width: 100%; /* One machine per row on small mobile screens */
+      width: 100%; 
     }
-  }  
+  }
