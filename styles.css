@@ -75,6 +75,11 @@ body {
     color: white;
   }
   
+  button:disabled {
+    background-color: #ccc;
+    color: #999;
+  }
+  
   @media only screen and (max-width: 768px) {
     .container {
       width: 95%;
@@ -82,21 +87,21 @@ body {
     }
   
     .machine {
-      width: calc(50% - 10px); 
+      width: calc(50% - 10px);
     }
   
     button, input {
-      font-size: 18px; 
+      font-size: 18px;
     }
   
     .timer, .machine-label {
-      font-size: 36px; 
+      font-size: 36px;
     }
   }
   
   @media only screen and (max-width: 480px) {
     .machine {
-      width: 100%; 
+      width: 100%;
     }
   
     .button-container {
