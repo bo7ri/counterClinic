@@ -1,8 +1,17 @@
-body {
+/* Variables */
+:root {
+    --primary-color: #4A90E2;
+    --text-color: #333;
+    --bg-color: #f3f4f6;
+    --white-color: #fff;
+  }
+  
+  body {
     font-family: 'Arial', sans-serif;
-    background-color: #f3f4f6;
+    background-color: var(--bg-color);
     margin: 0;
     padding: 0;
+    line-height: 1.6;
   }
   
   .container {
@@ -15,7 +24,8 @@ body {
   h1 {
     text-align: center;
     margin-bottom: 50px;
-    color: #4A90E2;
+    color: var(--primary-color);
+    font-weight: 600;
   }
   
   #machine-container {
@@ -27,14 +37,18 @@ body {
   
   .machine {
     width: calc(33% - 20px);
-    height: auto;
-    background: #fff;
+    background: var(--white-color);
     border: 1px solid #ccc;
     margin: 10px;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     text-align: center;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .machine:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
   }
   
   .button-container {
@@ -45,25 +59,18 @@ body {
   }
   
   .machine-label, .timer, .end-time {
-    font-size: 25px;
-    color: #4A90E2;
+    font-size: 24px;
+    color: var(--text-color);
     margin-bottom: 20px;
   }
   
-  .patient-name {
+  .patient-name, input[type="number"] {
     width: 100%;
     padding: 8px;
     font-size: 16px;
     margin-bottom: 10px;
     border-radius: 5px;
-  }
-  
-  input[type="number"] {
-    width: 100px;
-    padding: 8px;
-    font-size: 16px;
-    margin-right: 10px;
-    border-radius: 5px;
+    border: 1px solid #ccc;
   }
   
   button {
@@ -73,10 +80,16 @@ body {
     cursor: pointer;
     margin: 5px;
     border-radius: 5px;
-    background-color: #4A90E2;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    transition: all 0.3s ease-in-out;
   }
   
+  button:hover, button:focus {
+    background-color: #14599e;
+  }
+  
+  /* Media Queries */
   @media only screen and (max-width: 768px) {
     .container {
       width: 95%;
@@ -93,7 +106,6 @@ body {
   
     .timer, .machine-label, .end-time {
       font-size: 25px;
-      color: #4A90E2;
     }
   
     .patient-name {
@@ -110,3 +122,4 @@ body {
       flex-direction: column;
     }
   }
+  
